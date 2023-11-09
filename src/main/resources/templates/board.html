@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" >
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <title th:text="${board.name}">lit</title>
+</head>
+
+<body>
+    <div class="postsList" th:unless="${board.posts.isEmpty()}">
+        <p>Publicações em <span th:text="|/${board.name}/|">/lit/</span>.</p>
+        <ul>
+            <li th:each="post : ${board.posts.values}">
+                <a href="#" th:href="@{/boards/{bName}/{pId}(pId=${post.id}, bName=${board.name})}" th:text="|${#temporals.format(post.instantPosted, 'dd-MM-YYYY')} - ${post.title}|">01/11/2023 - Primeira publicação na board</a>
+            </li>
+        </ul>
+    </div>
+    <p th:if="${board.posts.isEmpty()}" th:text="|Não há ainda publicações em /${board.name}/.|">Não há ainda publicações em /lit/.</p>
+
+</body>
+</html>

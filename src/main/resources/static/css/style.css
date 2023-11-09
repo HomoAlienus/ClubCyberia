@@ -1,0 +1,13 @@
+body {
+    background-color: #e8e8e8;
+    margin: 0px auto;
+    padding: 8px;
+    max-width: 600px;
+    line-height: 1;
+    color: black;
+}
+
+ul {
+    padding: 0px;
+    list-style-type: none;
+}

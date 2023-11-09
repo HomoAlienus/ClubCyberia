@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -20,6 +19,7 @@ public class Post implements Serializable {
     @Setter private Long id;
 
     @Setter private String title;
+    @Setter private String content;
     @Setter private Instant instantPosted;
 
     @ManyToOne
@@ -30,7 +30,15 @@ public class Post implements Serializable {
     private List<Reply> replies = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "topic_id")
-    private Topic topic;
+    @JoinColumn(name = "board_name")
+    private Board board;
 
+    public Post(Long id, String title, String content, Instant instantPosted, User user, Board board) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.instantPosted = instantPosted;
+        this.user = user;
+        this.board = board;
+    }
 }

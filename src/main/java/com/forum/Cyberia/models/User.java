@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -22,8 +21,10 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     @Setter private String email;
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 120, nullable = false)
     @Setter private String password;
+
+    @Setter private String description;
 
     @Setter private Date dateJoined;
     @Setter private Role role;
@@ -33,4 +34,13 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user")
     private List<Reply> replies = new ArrayList<>();
+
+    public User(String username, String email, String password, Date dateJoined, Role role, String description) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.dateJoined = dateJoined;
+        this.role = role;
+        this.description = description;
+    }
 }

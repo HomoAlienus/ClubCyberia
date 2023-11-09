@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" >
     <title>Cyberia club</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
 </head>
+
 <body>
-  <p>Teste</p>
+  <p>Cyberia</p>
+  <div th:unless="${authenticated}">
+    <a href="/login.html" th:href="@{/login}" th:text="Entrar">Entrar</a><br/>
+    <a href="/register.html" th:href="@{/register}" th:text="Cadastrar-se">Cadastrar-se</a>
+  </div>
+
+  <div th:if="${authenticated}">
+      <p><span th:text="${user.username}">user1</span>. <a href="#" th:href="@{/users/{name}(name=${user.name})}">Ver perfil</a>.</p>
+  </div>
+
+
+    <div class="boardList">
+            <ul>
+                <li th:each="b : ${boards}" th:unless="${#lists.isEmpty(boards)}">
+                    <a href="#" th:href="@{/board/{bName}(bName=${b.name})}" th:text="|/${b.name}/|">/board/</a>:
+                    <span th:text="${b.description}">Descrição</span>
+                </li>
+            </ul>
+    </div>
 </body>
 </html>
