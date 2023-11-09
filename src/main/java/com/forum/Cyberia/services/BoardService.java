@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class BoardService {
     @Autowired
     private BoardRepository repository;
+
+    private Pattern illegalChars = Pattern.compile("[<>{}()_\'~/$º!#@*+%\\[\\]|\"\\_^]");
 
     public List<Board> findAll() {
         return repository.findAll();
@@ -23,6 +26,16 @@ public class BoardService {
     }
 
     public void insert(Board board) {
+        validateBoard(board);
         repository.save(board);
+    }
+
+    private void validateBoard(Board board) {
+        if (board != null && board.getName() != null)
+            if (!board.getName().isEmpty() && !board.getName().isBlank())
+                if (!illegalChars.matcher(board.getName()).find())
+                    return;
+
+        throw new IllegalArgumentException("Board é nula ou contém nome inválido.");
     }
 }

@@ -4,10 +4,10 @@ import com.forum.Cyberia.models.Board;
 import com.forum.Cyberia.services.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/board")
@@ -15,13 +15,25 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-    @ModelAttribute("board")
-    public Board getBoard(@PathVariable String name) {
-        return service.findByName(name);
+    @GetMapping(path = "/{board}")
+    public String getPosts(Model model, @PathVariable String board) {
+        model.addAttribute("board", service.findByName(board));
+        return "board";
     }
 
-    @GetMapping(path = "/{name}")
-    public String getPosts() {
-        return "board";
+    @GetMapping(path = "/add")
+    public String addBoard(Board board) {
+        return "addBoard";
+    }
+
+    @PostMapping(path = "/add", params = {"save"})
+    public String saveBoard(Board board, BindingResult bindingResult, ModelMap model) {
+        if (bindingResult.hasErrors())
+            return "addBoard";
+
+        service.insert(board);
+        model.clear();
+
+        return "redirect:/index";
     }
 }

@@ -26,9 +26,9 @@ public class Init implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Board b1 = new Board("lit", "Literatura");
-        Board b2 = new Board("philo", "Filosofia");
-        Board b3 = new Board("lat", "Latim");
+        Board b1 = new Board("lit");
+        Board b2 = new Board("philo");
+        Board b3 = new Board("lat");
 
         boardRepository.saveAll(Arrays.asList(b1, b2, b3));
 

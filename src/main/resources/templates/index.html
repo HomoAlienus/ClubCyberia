@@ -15,15 +15,14 @@
 
   <div sec:authorize="isAuthenticated()">
       <p><a th:href="@{/users/{name}(name=${#authentication.name})}" th:text="${#authentication.name}">user1</a>.
-      <a th:href="@{/logout}">Sair</a></p>
+      <a href="/logout" th:href="@{/logout}">Sair</a></p>
   </div>
 
 
     <div class="boardList">
             <ul>
                 <li th:each="b : ${boards}" th:unless="${#lists.isEmpty(boards)}">
-                    <a href="#" th:href="@{/board/{bName}(bName=${b.name})}" th:text="|/${b.name}/|">/board/</a>:
-                    <span th:text="${b.description}">Descrição</span>
+                    <a href="#" th:href="@{/board/{bName}(bName=${b.name})}" th:text="|/${b.name}/|">/board/</a>
                 </li>
                 <div sec:authorize="isAuthenticated()" th:if="${#strings.equals(user.role, 'ADMIN')}">
                     <li><a href="/board/add.html" th:href="@{/board/add}">Criar board</a>.</li>

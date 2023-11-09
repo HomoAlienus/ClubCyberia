@@ -1,10 +1,24 @@
-body {
-    background-color: #e8e8e8;
+html {
+    background: #191629;
+}
+
+body{
+    background: #191629 !important;
     margin: 0px auto;
     padding: 8px;
     max-width: 600px;
     line-height: 1;
-    color: black;
+    margin: 0 auto;
+    /*color: #32a852;*/
+    color: #eb8c34;
+}
+
+a:link {
+    color: #eb8c34;
+}
+
+a:visited{
+    color: #eb8c34;
 }
 
 ul {

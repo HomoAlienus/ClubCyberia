@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" >
+    <title>Cyberia club</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+    <form action="#" th:action="@{/board/add}" th:object="${board}" method="post">
+        <label for="name">Identificador do board</label>
+        <input type="text" id="name" th:field="*{name}" /><br/>
+
+        <button type="submit" name="save">Salvar</button>
+
+    </form>
+</body>
+</html>

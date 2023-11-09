@@ -19,13 +19,10 @@ public class Board implements Serializable {
     @Column(nullable = false, unique = true)
     @Setter private String name;
 
-    @Setter private String description;
-
     @OneToMany(mappedBy = "board")
     private Map<Long, Post> posts = new HashMap<Long, Post>();
 
-    public Board(String name, String description) {
+    public Board(String name) {
         this.name = name;
-        this.description = description;
     }
 }

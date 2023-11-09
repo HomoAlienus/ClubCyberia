@@ -7,11 +7,12 @@
 </head>
 
 <body>
+    <a href="/" th:href="@{/}">Cyberia</a>
     <div class="postsList" th:unless="${board.posts.isEmpty()}">
         <p>Publicações em <span th:text="|/${board.name}/|">/lit/</span>.</p>
         <ul>
             <li th:each="post : ${board.posts.values}">
-                <a href="#" th:href="@{/boards/{bName}/{pId}(pId=${post.id}, bName=${board.name})}" th:text="|${#temporals.format(post.instantPosted, 'dd-MM-YYYY')} - ${post.title}|">01/11/2023 - Primeira publicação na board</a>
+                <a href="#" th:href="@{/board/{bName}/{pId}(pId=${post.id}, bName=${board.name})}" th:text="|${#temporals.format(post.instantPosted, 'dd-MM-YYYY')} - ${post.title}|">01/11/2023 - Primeira publicação na board</a>
             </li>
         </ul>
     </div>
