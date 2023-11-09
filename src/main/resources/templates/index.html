@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" lang="pt">
 <head>
     <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" >
     <title>Cyberia club</title>
@@ -8,13 +8,14 @@
 
 <body>
   <p>Cyberia</p>
-  <div th:unless="${authenticated}">
+  <div sec:authorize="!isAuthenticated()">
     <a href="/login.html" th:href="@{/login}" th:text="Entrar">Entrar</a><br/>
     <a href="/register.html" th:href="@{/register}" th:text="Cadastrar-se">Cadastrar-se</a>
   </div>
 
-  <div th:if="${authenticated}">
-      <p><span th:text="${user.username}">user1</span>. <a href="#" th:href="@{/users/{name}(name=${user.name})}">Ver perfil</a>.</p>
+  <div sec:authorize="isAuthenticated()">
+      <p><a th:href="@{/users/{name}(name=${#authentication.name})}" th:text="${#authentication.name}">user1</a>.
+      <a th:href="@{/logout}">Sair</a></p>
   </div>
 
 
@@ -24,7 +25,11 @@
                     <a href="#" th:href="@{/board/{bName}(bName=${b.name})}" th:text="|/${b.name}/|">/board/</a>:
                     <span th:text="${b.description}">Descrição</span>
                 </li>
+                <div sec:authorize="isAuthenticated()" th:if="${#strings.equals(user.role, 'ADMIN')}">
+                    <li><a href="/board/add.html" th:href="@{/board/add}">Criar board</a>.</li>
+                </div>
             </ul>
+
     </div>
 </body>
 </html>

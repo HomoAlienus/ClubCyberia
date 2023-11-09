@@ -39,7 +39,8 @@ public class SecConfig {
                         .anyRequest().permitAll())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
-                        .permitAll());
+                        .permitAll())
+                .logout(logout -> logout.logoutSuccessUrl("/index"));
 
         return http.build();
     }
