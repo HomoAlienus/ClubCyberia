@@ -8,6 +8,16 @@
 
 <body>
     <a href="/" th:href="@{/}">Cyberia</a>
+    <div>
+        <form action="#" th:action="@{/board/{boardname}(boardname=${board.name})}" th:object="${postForm}" method="post"><br/>
+            <legend>Escrever novo post</legend>
+
+            <input class="title" type="text" name="title" id="title" th:field="*{title}" placeholder="Título" /><br/>
+            <textarea id="content" name="content" th:field="*{content}" placeholder="Conteúdo da publicação."></textarea>
+            <button type="submit" name="save">Enviar</button>
+        </form>
+    </div>
+
     <div class="postsList" th:unless="${board.posts.isEmpty()}">
         <p>Publicações em <span th:text="|/${board.name}/|">/lit/</span>.</p>
         <ul>

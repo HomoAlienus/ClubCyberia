@@ -25,3 +25,27 @@ ul {
     padding: 0px;
     list-style-type: none;
 }
+
+label {
+    display: inline-block;
+    float: left;
+    width: 10%;
+    text-align: right;
+    clear: left;
+}
+
+input {
+    display: inline-block;
+    float: left;
+}
+
+input.title {
+    width: 100%;
+}
+
+textarea {
+    display: inline-block;
+    float:left;
+    width: 100%;
+    height: 100px;
+}

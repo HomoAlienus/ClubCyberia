@@ -31,7 +31,7 @@ public class Post implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "board_name")
-    private Board board;
+    @Setter private Board board;
 
     public Post(Long id, String title, String content, Instant instantPosted, User author, Board board) {
         this.id = id;
