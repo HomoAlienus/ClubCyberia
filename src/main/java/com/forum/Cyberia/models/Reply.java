@@ -26,6 +26,6 @@ public class Reply implements Serializable {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "author_id")
+    private User author;
 }

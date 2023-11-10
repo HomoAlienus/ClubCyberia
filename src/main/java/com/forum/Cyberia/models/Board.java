@@ -20,7 +20,7 @@ public class Board implements Serializable {
     @Setter private String name;
 
     @OneToMany(mappedBy = "board")
-    private Map<Long, Post> posts = new HashMap<Long, Post>();
+    private Set<Post> posts = new HashSet<>();
 
     public Board(String name) {
         this.name = name;

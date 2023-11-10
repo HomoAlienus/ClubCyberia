@@ -1,6 +1,7 @@
 package com.forum.Cyberia.controllers;
 
 import com.forum.Cyberia.models.Board;
+import com.forum.Cyberia.models.Post;
 import com.forum.Cyberia.services.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,5 +36,15 @@ public class BoardController {
         model.clear();
 
         return "redirect:/index";
+    }
+
+    @GetMapping(path = "/{board}/{id}")
+    public String getPost(@PathVariable("board") String board, @PathVariable("id") Long id, Model model) {
+        Board boardObj = service.findByName(board);
+        model.addAttribute("board", boardObj);
+        Post post = boardObj.getPosts().stream().filter(b -> id.equals(b.getId())).findFirst().orElse(null);
+
+        model.addAttribute("post", post);
+        return "post";
     }
 }

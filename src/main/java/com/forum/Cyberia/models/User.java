@@ -29,10 +29,10 @@ public class User implements Serializable {
     @Setter private Date dateJoined;
     @Setter private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "author")
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "author")
     private List<Reply> replies = new ArrayList<>();
 
     public User(String username, String email, String password, Date dateJoined, Role role, String description) {

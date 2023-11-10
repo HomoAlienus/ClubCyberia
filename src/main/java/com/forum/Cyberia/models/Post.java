@@ -23,8 +23,8 @@ public class Post implements Serializable {
     @Setter private Instant instantPosted;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @Setter private User user;
+    @JoinColumn(name = "author_id")
+    @Setter private User author;
 
     @OneToMany(mappedBy = "post")
     private List<Reply> replies = new ArrayList<>();
@@ -33,12 +33,12 @@ public class Post implements Serializable {
     @JoinColumn(name = "board_name")
     private Board board;
 
-    public Post(Long id, String title, String content, Instant instantPosted, User user, Board board) {
+    public Post(Long id, String title, String content, Instant instantPosted, User author, Board board) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.instantPosted = instantPosted;
-        this.user = user;
+        this.author = author;
         this.board = board;
     }
 }

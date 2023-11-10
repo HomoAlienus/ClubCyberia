@@ -8,6 +8,16 @@
 
 <body>
     <a href="/" th:href="@{/}">Cyberia</a>
+    <a href="#" th:href="@{/board/{boardname}(boardname=${board.name})}" th:text="|/${board.name}/|">/lit/</a>
+    <div th:object="${post}">
+        <h2 th:text="*{title}">Título do post</h2>
+        <a th:href="@{/users/{username}(username=*{author.username})}" th:text="*{author.username}">Autor</a>
+        <p th:text="*{content}">Conteúdo.</p>
+    </div>
 
+    <div th:each="reply : ${post.replies}">
+        ~<a href="#" th="#" th:href="@{/users/{username}(username=${reply.author.username})}" th:text="${reply.author.username}">User</a>
+        <p th:text="${reply.content}">Conteúdo da resposta.</p>
+    </div>
 </body>
 </html>
