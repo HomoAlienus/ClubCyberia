@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 import java.util.Calendar;
-
 @Configuration
 public class Init implements CommandLineRunner {
     @Autowired
@@ -30,7 +29,7 @@ public class Init implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Board b1 = new Board("lit");
+        /*Board b1 = new Board("lit");
         Board b2 = new Board("philo");
         Board b3 = new Board("lat");
 
@@ -48,6 +47,6 @@ public class Init implements CommandLineRunner {
         Reply r1 = new Reply(null, "Aliquod novi excogitare non potes? Hoc ex inscriptione Pompeiana est!", Calendar.getInstance().toInstant(), p1, u2);
         Reply r2 = new Reply(null, "...", Calendar.getInstance().toInstant(), p1, u1);
 
-        replyRepository.saveAll(Arrays.asList(r1, r2));
+        replyRepository.saveAll(Arrays.asList(r1, r2));*/
     }
 }

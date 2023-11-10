@@ -19,6 +19,7 @@ public class Post implements Serializable {
     @Setter private Long id;
 
     @Setter private String title;
+    @Column(name = "content", length = 65535)
     @Setter private String content;
     @Setter private Instant instantPosted;
 

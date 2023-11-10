@@ -15,9 +15,16 @@
         <p th:utext="*{content}">Conteúdo.</p>
     </div>
 
+    <form action="#" th:action="@{/board/{boardname}/{id}/reply(boardname=${board.name},id=${post.id})}" th:object="${replyForm}" method="post">
+        <textarea placeholder="Conteúdo da resposta." th:field="*{content}"></textarea>
+        <button type="submit" name="save">Enviar</button>
+    </form>
+
+    <h3>Respostas</h3>
     <div th:each="reply : ${post.replies}">
         ~<a href="#" th="#" th:href="@{/users/{username}(username=${reply.author.username})}" th:text="${reply.author.username}">User</a>
         <p th:utext="${reply.content}">Conteúdo da resposta.</p>
     </div>
+    <p th:if="${#lists.isEmpty(post.replies)}">Este post ainda não tem respostas.</p>
 </body>
 </html>

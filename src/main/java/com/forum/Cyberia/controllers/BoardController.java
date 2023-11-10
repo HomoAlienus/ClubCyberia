@@ -1,11 +1,11 @@
 package com.forum.Cyberia.controllers;
 
-import com.forum.Cyberia.models.Board;
-import com.forum.Cyberia.models.Post;
-import com.forum.Cyberia.models.PostForm;
-import com.forum.Cyberia.models.User;
+import com.forum.Cyberia.models.*;
+import com.forum.Cyberia.models.forms.ReplyForm;
+import com.forum.Cyberia.repositories.ReplyRepository;
 import com.forum.Cyberia.services.BoardService;
 import com.forum.Cyberia.services.PostService;
+import com.forum.Cyberia.services.ReplyService;
 import com.forum.Cyberia.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -26,6 +26,8 @@ public class BoardController {
     private UserService userService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private ReplyService replyService;
 
     @GetMapping(path = "/{board}")
     public String getPosts(PostForm postForm, Model model, @PathVariable String board) {
@@ -69,12 +71,32 @@ public class BoardController {
     }
 
     @GetMapping(path = "/{board}/{id}")
-    public String getPost(@PathVariable("board") String board, @PathVariable("id") Long id, Model model) {
+    public String getPost(ReplyForm replyForm, @PathVariable("board") String board, @PathVariable("id") Long id, Model model) {
         Board boardObj = boardService.findByName(board);
         model.addAttribute("board", boardObj);
-        Post post = boardObj.getPosts().stream().filter(b -> id.equals(b.getId())).findFirst().orElse(null);
+        Post post = findPost(boardObj, id);
 
         model.addAttribute("post", post);
         return "post";
+    }
+
+    @PostMapping(path = "/{board}/{id}/reply", params = {"save"})
+    public String addReply(ReplyForm replyForm, @PathVariable("board") String board, @PathVariable("id") Long id,
+                           ModelMap model, Authentication authentication) {
+        User user = userService.findByUsername(authentication.getName());
+        Board boardObj = boardService.findByName(board);
+
+        Post post = findPost(boardObj, id);
+
+        Reply reply = new Reply(null, replyForm.getContent(), Calendar.getInstance().toInstant(),
+                post, user);
+        replyService.save(reply);
+        model.clear();
+
+        return String.format("redirect:/board/%s/%d", board, id);
+    }
+
+    private Post findPost(Board board, Long id) {
+        return board.getPosts().stream().filter(b -> id.equals(b.getId())).findFirst().orElse(null);
     }
 }

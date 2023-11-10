@@ -36,6 +36,8 @@ public class SecConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/board/**").authenticated())
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/users/**").authenticated())
+                .authorizeHttpRequests(request -> request
                         .anyRequest().permitAll())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

@@ -18,7 +18,9 @@ public class Reply implements Serializable {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(name = "content", length = 65535)
     private String content;
+
     private Instant instantPosted;
 
     @ManyToOne

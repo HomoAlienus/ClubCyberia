@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" >
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <title th:text="${user.username}">lit</title>
+</head>
+
+<body>
+    <a href="/" th:href="@{/}">Cyberia</a>
+    <h2 th:text="${user.username}">username</h2>
+    <p th:text="${user.description}">Descrição</p>
+
+    <h3>Publicações</h3>
+    <div th:unless="${#lists.isEmpty(posts)}">
+        <ul>
+            <li th:each="post : ${posts}">
+                <a href="/board/post.html" th:href="@{/board/{boardname}/{id}(boardname=${post.board.name},id=${post.id})}" th:text="|${#temporals.format(post.instantPosted, 'dd-MM-YYYY')} - ${post.title}|">01/11/2023 - Uma publicação.</a>
+            </li>
+        </ul>
+    </div>
+
+    <p th:if="${#lists.isEmpty(posts)}">Este usuário não fez nenhuma publicação.</p>
+
+</body>
+</html>
