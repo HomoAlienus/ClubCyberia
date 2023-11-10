@@ -10,6 +10,7 @@
     <a href="/" th:href="@{/}">Cyberia</a>
     <h2 th:text="${user.username}">username</h2>
     <p th:text="${user.description}">Descrição</p>
+    <a th:if="${#strings.equals(user.username, #authentication.name)}" th:href="@{/users/desc}">Mudar descrição</a>
 
     <h3>Publicações</h3>
     <div th:unless="${#lists.isEmpty(posts)}">

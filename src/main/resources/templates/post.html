@@ -16,7 +16,7 @@
     </div>
 
     <form action="#" th:action="@{/board/{boardname}/{id}/reply(boardname=${board.name},id=${post.id})}" th:object="${replyForm}" method="post">
-        <textarea placeholder="Conteúdo da resposta." th:field="*{content}"></textarea>
+        <textarea class="content" placeholder="Conteúdo da resposta." th:field="*{content}"></textarea>
         <button type="submit" name="save">Enviar</button>
     </form>
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+  <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" >
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+  <title th:text="Registro">lit</title>
+</head>
+
+<body>
+  <a href="/" th:href="@{/}">Cyberia</a>
+  <p class="error" th:if="${error}" th:text="${error}">Error</p>
+
+  <form th:action="@{/register}" th:object="${userForm}" method="post">
+    <label for="username">Nome de usuário</label>
+    <input type="text" id="username" th:field="*{username}" />
+
+    <label for="email">Endereço de e-mail</label>
+    <input  type="text" id="email" th:field="*{email}" />
+
+
+    <label for="password">Senha</label>
+    <input type="password" id="password" th:field="*{password}" />
+
+    <label for="description">Descrição (opcional)</label>
+    <textarea id="description" th:field="*{description}"></textarea>
+
+    <button type="submit" name="save">Registrar</button>
+
+  </form>
+
+
+</body>
+</html>

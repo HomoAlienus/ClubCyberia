@@ -1,7 +1,9 @@
 package com.forum.Cyberia.controllers;
 
 import com.forum.Cyberia.models.*;
+import com.forum.Cyberia.models.enums.Role;
 import com.forum.Cyberia.models.forms.ReplyForm;
+import com.forum.Cyberia.models.forms.UserForm;
 import com.forum.Cyberia.repositories.ReplyRepository;
 import com.forum.Cyberia.services.BoardService;
 import com.forum.Cyberia.services.PostService;
