@@ -2,6 +2,7 @@ package com.forum.Cyberia.services;
 
 import com.forum.Cyberia.models.Board;
 import com.forum.Cyberia.models.Post;
+import com.forum.Cyberia.models.exceptions.NotFoundException;
 import com.forum.Cyberia.repositories.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,10 @@ public class BoardService {
     }
 
     public Board findByName(String name) {
-        return repository.findByName(name);
+        Board board = repository.findByName(name);
+        if (board == null)
+            throw new NotFoundException("Board não encontrada.");
+        return board;
     }
 
     public void insert(Board board) {

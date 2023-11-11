@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" >
+    <title>error</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+    <a href="/" th:href="@{/}">Cyberia</a>
+    <p th:text="${error}">Error.</p>
+
+</body>
+</html>

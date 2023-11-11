@@ -2,6 +2,7 @@ package com.forum.Cyberia.controllers;
 
 import com.forum.Cyberia.models.*;
 import com.forum.Cyberia.models.enums.Role;
+import com.forum.Cyberia.models.exceptions.NotFoundException;
 import com.forum.Cyberia.models.forms.ReplyForm;
 import com.forum.Cyberia.models.forms.UserForm;
 import com.forum.Cyberia.repositories.ReplyRepository;
@@ -99,6 +100,9 @@ public class BoardController {
     }
 
     private Post findPost(Board board, Long id) {
-        return board.getPosts().stream().filter(b -> id.equals(b.getId())).findFirst().orElse(null);
+        Post post = board.getPosts().stream().filter(b -> id.equals(b.getId())).findFirst().orElse(null);
+        if (post == null)
+            throw new NotFoundException("Post não encontrado.");
+        return post;
     }
 }

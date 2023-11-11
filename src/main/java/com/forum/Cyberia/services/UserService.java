@@ -1,6 +1,7 @@
 package com.forum.Cyberia.services;
 
 import com.forum.Cyberia.models.User;
+import com.forum.Cyberia.models.exceptions.NotFoundException;
 import com.forum.Cyberia.models.exceptions.UserCreationException;
 import com.forum.Cyberia.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,17 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        return repository.findByEmail(email);
+        User user = repository.findByEmail(email);
+        if (user == null)
+            throw new NotFoundException("Usuário não encontrado.");
+        return user;
     }
 
     public User findByUsername(String username) {
-        return repository.findByUsername(username);
+        User user =  repository.findByUsername(username);
+        if (user == null)
+            throw new NotFoundException("Usuário não encontrado.");
+        return user;
     }
 
     private void validateUser(User user) {

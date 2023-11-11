@@ -12,7 +12,7 @@
   <p class="error" th:if="${error}" th:text="${error}">Error</p>
   <br/>
   <form th:action="@{/users/desc}" th:object="${replyForm}" method="post">
-    <textarea class="content" th:field="*{content}" th:text="${user.description}">Descrição.</textarea>
+    <textarea class="content" th:field="*{content}"></textarea>
     <button type="submit" name="save">Salvar</button>
   </form>
 
